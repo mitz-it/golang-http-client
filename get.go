@@ -1,7 +1,9 @@
 package httpclient
 
-func Get[TContent any](url string, options ...ConfigureRequestOptions) HttpResponse[TContent] {
-	request := createRequest(options)
+import "context"
+
+func Get[TContent any](ctx context.Context, url string, options ...ConfigureRequestOptions) HttpResponse[TContent] {
+	request := createRequest(ctx, options)
 
 	response, requestError := request.Get(url)
 

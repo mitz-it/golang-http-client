@@ -1,6 +1,9 @@
 package httpclient
 
-import "io"
+import (
+	"context"
+	"io"
+)
 
 type FileMetadata struct {
 	Content  io.Reader
@@ -8,8 +11,8 @@ type FileMetadata struct {
 	FileName string
 }
 
-func UploadFile[TResponse any](url string, fileMetadata FileMetadata, options ...ConfigureRequestOptions) HttpResponse[TResponse] {
-	request := createRequest(options)
+func UploadFile[TResponse any](ctx context.Context, url string, fileMetadata FileMetadata, options ...ConfigureRequestOptions) HttpResponse[TResponse] {
+	request := createRequest(ctx, options)
 
 	request.SetFileReader(fileMetadata.Param, fileMetadata.FileName, fileMetadata.Content)
 

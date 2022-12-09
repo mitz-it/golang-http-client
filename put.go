@@ -1,7 +1,9 @@
 package httpclient
 
-func Put[TBody, TContent any](url string, body TBody, options ...ConfigureRequestOptions) HttpResponse[TContent] {
-	request := createRequest(options)
+import "context"
+
+func Put[TBody, TContent any](ctx context.Context, url string, body TBody, options ...ConfigureRequestOptions) HttpResponse[TContent] {
+	request := createRequest(ctx, options)
 
 	serializeBody(request, body)
 
