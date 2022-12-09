@@ -1,7 +1,9 @@
 package httpclient
 
-func Delete(url string, options ...ConfigureRequestOptions) HttpResponse[struct{}] {
-	request := createRequest(options)
+import "context"
+
+func Delete(ctx context.Context, url string, options ...ConfigureRequestOptions) HttpResponse[struct{}] {
+	request := createRequest(ctx, options)
 
 	response, err := request.Delete(url)
 
